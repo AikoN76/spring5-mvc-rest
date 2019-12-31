@@ -18,11 +18,12 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CustomerControllerTest {
+public class CustomerControllerTest extends AbstractRestControllerTest {
 
     public static final long ID_ONE = 1L;
     public static final String FIRST_NAME_ONE = "First Name One";
@@ -80,5 +81,32 @@ public class CustomerControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo(FIRST_NAME_ONE)));
+    }
+
+    @Test
+    public void createNewCustomer() throws Exception {
+        // given
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstname("Fred");
+        customerDTO.setLastname("Flintstones");
+
+        CustomerDTO returnedDTO = new CustomerDTO();
+        returnedDTO.setId(1L);
+        returnedDTO.setFirstname("Fred");
+        returnedDTO.setLastname("Flintstones");
+        returnedDTO.setCustomerUrl("/api/v1/customers/1");
+
+        // when
+        when(customerService.createNewCustomer(customerDTO)).thenReturn(returnedDTO);
+
+        // then
+        mockMvc.perform(post("/api/v1/customers/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customerDTO)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.firstname", equalTo("Fred")))
+                .andExpect(jsonPath("$.lastname", equalTo("Flintstones")))
+                .andExpect(jsonPath("$.customerUrl", equalTo("/api/v1/customers/1")));
+
     }
 }
