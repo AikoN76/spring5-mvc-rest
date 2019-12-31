@@ -1,10 +1,7 @@
 package guru.springframework.services;
 
 import guru.springframework.api.v1.mapper.CategoryMapper;
-import guru.springframework.api.v1.mapper.CustomerMapper;
 import guru.springframework.api.v1.model.CategoryDTO;
-import guru.springframework.api.v1.model.CustomerDTO;
-import guru.springframework.domain.Customer;
 import guru.springframework.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +28,5 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDTO getCategoryByName(String name) {
         return categoryMapper.categoryToCategoryDTO(categoryRepository.findByName(name));
     }
+
 }

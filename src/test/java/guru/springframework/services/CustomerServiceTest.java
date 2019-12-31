@@ -2,6 +2,7 @@ package guru.springframework.services;
 
 import guru.springframework.api.v1.mapper.CustomerMapper;
 import guru.springframework.api.v1.model.CustomerDTO;
+import guru.springframework.controllers.v1.CustomerController;
 import guru.springframework.domain.Customer;
 import guru.springframework.repositories.CustomerRepository;
 import org.junit.Before;
@@ -88,7 +89,7 @@ public class CustomerServiceTest {
         assertEquals(Long.valueOf(1L), savedCustomerDTO.getId());
         assertEquals(customerDTO.getFirstname(), savedCustomerDTO.getFirstname());
         assertEquals(customerDTO.getLastname(), savedCustomerDTO.getLastname());
-        assertEquals("/api/v1/customers/1", savedCustomerDTO.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + "1", savedCustomerDTO.getCustomerUrl());
     }
 
     @Test
