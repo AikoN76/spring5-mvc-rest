@@ -3,7 +3,6 @@ package guru.springframework.services;
 import guru.springframework.api.v1.mapper.CustomerMapper;
 import guru.springframework.api.v1.model.CustomerDTO;
 import guru.springframework.domain.Customer;
-import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.CustomerRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -29,7 +28,7 @@ public class CustomerServiceTest {
     CustomerRepository customerRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);
     }
@@ -69,7 +68,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void createNewCustomer() throws Exception {
+    public void createNewCustomer()  {
         // given
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setFirstname("John");
