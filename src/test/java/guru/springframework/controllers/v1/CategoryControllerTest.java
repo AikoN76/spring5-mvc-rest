@@ -1,4 +1,4 @@
-package guru.springframework.controllers;
+package guru.springframework.controllers.v1;
 
 import guru.springframework.api.v1.model.CategoryDTO;
 import guru.springframework.services.CategoryService;
@@ -56,8 +56,8 @@ public class CategoryControllerTest {
 
         when(categoryService.getAllCategories()).thenReturn(categoryDTOList);
 
-        mockMvc.perform(get("/api/v1/categories/").
-                contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/categories/")
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categories", Matchers.hasSize(2)));
     }
