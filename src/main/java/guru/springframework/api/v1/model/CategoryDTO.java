@@ -1,5 +1,6 @@
 package guru.springframework.api.v1.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -8,5 +9,6 @@ import lombok.Data;
 @Data
 public class CategoryDTO {
     private Long id;
+    @ApiModelProperty(value = "This is the name of the category", required = true)
     private String name;
 }
