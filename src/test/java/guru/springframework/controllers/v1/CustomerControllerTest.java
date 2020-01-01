@@ -117,7 +117,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     public void testUpdateCustomer() throws Exception {
         // given
         CustomerDTO updatingCustomerDTO = new CustomerDTO();
-        updatingCustomerDTO.setLastname("Fred");
+        updatingCustomerDTO.setFirstname("Fred");
         updatingCustomerDTO.setLastname("Flintstone");
 
         CustomerDTO updatedCustomerDTO = new CustomerDTO();

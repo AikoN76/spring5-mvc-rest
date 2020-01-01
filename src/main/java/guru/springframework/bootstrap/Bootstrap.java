@@ -2,11 +2,16 @@ package guru.springframework.bootstrap;
 
 import guru.springframework.domain.Category;
 import guru.springframework.domain.Customer;
+import guru.springframework.domain.Vendor;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.CustomerRepository;
+import guru.springframework.repositories.VendorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -16,15 +21,19 @@ public class Bootstrap implements CommandLineRunner {
 
     private CustomerRepository customerRepository;
 
-    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    private VendorRepository vendorRepository;
+
+    public Bootstrap(CategoryRepository categoryRepository, CustomerRepository customerRepository, VendorRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         loadCategories();
         loadCustomers();
+        loadVendors();
     }
 
     private void loadCustomers() {
@@ -84,4 +93,20 @@ public class Bootstrap implements CommandLineRunner {
 
         log.debug("Data Category Loaded: " + categoryRepository.count());
     }
+
+    private void saveVendor(String name){
+        Vendor vendor = new Vendor();
+        vendor.setName(name);
+        vendorRepository.save(vendor);
+    }
+
+    private void loadVendors() {
+        List<String> vendorNames = Arrays.asList("Western Tasty Fruits Ltd.", "Exotic Fruits Company", "Home Fruits", "Fun Fresh Fruits Ltd.", "Nuts for Nuts Company", "Marche Gare", "Marche Gare 2", "Marche Gare 3", "Marche Gare 4");
+        for(String name : vendorNames){
+            saveVendor(name);
+        }
+        log.debug("Data Vendor Loaded: " + vendorRepository.count());
+    }
+
+
 }

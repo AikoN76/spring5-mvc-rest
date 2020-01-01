@@ -4,8 +4,6 @@ import guru.springframework.api.v1.model.CustomerDTO;
 import guru.springframework.api.v1.model.CustomerListDTO;
 import guru.springframework.services.CustomerService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
