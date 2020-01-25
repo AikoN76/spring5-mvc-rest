@@ -5,7 +5,6 @@ import guru.springframework.services.CustomerService;
 import guru.springframework.services.ResourceNotFoundException;
 import org.hamcrest.Matchers;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -89,7 +88,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .andExpect(jsonPath("$.firstname", equalTo(FIRST_NAME_ONE)));
     }
 
-    @Ignore
+
     @Test
     public void createNewCustomer() throws Exception {
         // given
@@ -104,7 +103,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         returnedDTO.setCustomerUrl(CustomerController.BASE_URL + "1");
 
         // when
-        when(customerService.createNewCustomer(customerDTO)).thenReturn(returnedDTO);
+        when(customerService.createNewCustomer(any())).thenReturn(returnedDTO);
 
         // then
         mockMvc.perform(post(CustomerController.BASE_URL)
@@ -117,7 +116,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
                 .andExpect(jsonPath("$.customerUrl", equalTo(CustomerController.BASE_URL + "1")));
 
     }
-    @Ignore
+
     @Test
     public void testUpdateCustomer() throws Exception {
         // given
@@ -131,7 +130,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         updatedCustomerDTO.setCustomerUrl(CustomerController.BASE_URL + "1");
 
         // when
-        when(customerService.saveCustomerByDTO(anyLong(), eq(updatingCustomerDTO))).thenReturn(updatedCustomerDTO);
+        when(customerService.saveCustomerByDTO(anyLong(), any())).thenReturn(updatedCustomerDTO);
 
         // then
         mockMvc.perform(put(CustomerController.BASE_URL + "1")
