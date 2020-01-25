@@ -4,7 +4,7 @@ import guru.springframework.api.v1.model.VendorDTO;
 import guru.springframework.domain.Vendor;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class VendorMapperTest {
 
