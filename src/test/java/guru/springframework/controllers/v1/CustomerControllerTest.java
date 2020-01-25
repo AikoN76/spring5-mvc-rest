@@ -66,7 +66,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         when(customerService.getAllCustomers()).thenReturn(customerDTOList);
 
         mockMvc.perform(get(CustomerController.BASE_URL)
-            .contentType(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", Matchers.hasSize(2)));
     }
@@ -81,7 +82,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
         when(customerService.getCustomerById(anyLong())).thenReturn(customerOneDTO);
 
         mockMvc.perform(get(CustomerController.BASE_URL + "1")
-            .contentType(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo(FIRST_NAME_ONE)));
     }
@@ -104,6 +106,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         // then
         mockMvc.perform(post(CustomerController.BASE_URL)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customerDTO)))
                 .andExpect(status().isCreated())
@@ -130,7 +133,8 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         // then
         mockMvc.perform(put(CustomerController.BASE_URL + "1")
-            .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(updatingCustomerDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo("Fred")))
@@ -154,6 +158,7 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         mockMvc.perform(patch(CustomerController.BASE_URL + "1")
             .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customerDTO)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstname", equalTo("Fred")))
